@@ -1,8 +1,8 @@
-// imports
 import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
-import router from "./routes/fruits.mjs";
+import router from "./routes/cars.mjs";
+import car from "./models/carSchema.mjs"
 
 // variables
 dotenv.config();
@@ -14,6 +14,21 @@ app.use(express.json());
 
 // routes
 app.use("./routes", router);
+
+async () => {
+    await db.createCollection('cars', {
+        validator: {
+            $jsonSchema: {
+                bsonType: 'object',
+                title: 'Car Validation',
+                required: ['make', 'model', 'year', 'inProduction'],
+                properties: {
+                    
+                }
+            }
+        }
+    })
+}
 
 // error-handling
 app.use((err, _req, res, next) => {
