@@ -1,8 +1,8 @@
 import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
-import router from "./routes/cars.mjs";
-import car from "./models/carSchema.mjs"
+
+import router from "./routes/routes.mjs";
 
 // variables
 dotenv.config();
@@ -11,6 +11,14 @@ const PORT = process.env.PORT || 3000;
 
 // middleware
 app.use(express.json());
+
+try {
+  async function main(){
+    await mongoose.connect(PORT);
+}  
+} catch (error) {
+    console.log(err);
+}
 
 // routes
 app.use("./routes", router);
