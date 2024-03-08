@@ -58,17 +58,12 @@ app.listen(PORT, () => {
     console.log(`You are listening on port #${PORT}`);
 })
 
-
-// practicing with Web Dev Simplified:
-
-
-
-// run();
-// async function run(){
-//     const bmw = await Car.create({make: 'BMW', model: '335i', year: 2010, inProduction: false})
-//     console.log(`Car saved!: \n ${bmw}`)
+run();
+async function run(){
+    const bmw = await Car.create({make: 'BMW', model: '335i', year: 2010, inProduction: false})
+    console.log(`Car saved!: \n ${bmw}`)
     
-// }
+}
 
 // clean();
 // async function clean(){
