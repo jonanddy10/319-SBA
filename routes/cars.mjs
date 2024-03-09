@@ -1,16 +1,23 @@
 import express from 'express';
 import carSchema from '../models/carSchema.mjs';
 
-const router = express.Router();
+const router = express.Router()
 
 // My routes:
 
 //C: create/post
-router.post("/:id", async (req, res) => {
+router.post("/", async (req, res) => {
+    const car = new carSchema({
+        make: req.body.make, 
+        model: req.body.model, 
+        year: req.body.year, 
+        inProduction: req.body.inProduction,
+    })
     try {
-        
+        const newCar = await car.save()
+        res.status(201).json(newCar)
     } catch (error) {
-        
+        res.status(400).json({ message: error.message })
     }
 });
 

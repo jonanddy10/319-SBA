@@ -61,7 +61,7 @@ plugMongoDB();
 
 // clean();
 // async function clean(){
-//     const car = await Car.deleteMany({make: 'BMW'})
+//     const car = await Car.deleteMany({make: 'Mazda'})
 //     console.log(car)
 // }
 

@@ -2,3 +2,12 @@ GET http://localhost:3000/cars
 
 ###
 
+POST http://localhost:3000/cars
+Content-Type: application/json
+
+{
+    "make": "BMW",
+    "model": "e90",
+    "year": 2011,
+    "inProduction": false
+}
