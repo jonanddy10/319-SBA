@@ -20,5 +20,5 @@ const carSchema = new mongoose.Schema({
     }
 })
 
-// export function: collection name in MongoDB: car, Schema name: carSchema
+// export function: collection name in MongoDB is: car, Schema name is: carSchema
 export default mongoose.model("car", carSchema);
