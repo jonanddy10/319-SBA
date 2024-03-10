@@ -22,11 +22,7 @@ Content-Type: application/json
 }
 
 ###
-//R: read all
-GET http://localhost:3000/cars
-
-###
-//R: read one (by ObjectID). eg: '/cars/_id'
+//R: read All or one (by ObjectID). eg: '/cars/_id'
 GET http://localhost:3000/cars/
 
 ###
