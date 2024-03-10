@@ -1,9 +1,9 @@
 const bikeData = [
-    {make: 'Mazda', model: 'RX-7', year: 1993},
-    {make: 'Mazda', model: 'Miata', year: 2006},
-    {make: 'Mazda', model: 'CX-5', year: 2017},
-    {make: 'Mazda', model: 'Mazda3', year: 2003},
-    {make: 'Mazda', model: 'CX-30', year: 2019},
+    {make: 'Triumph', model: 'Bonneville T120', year: 2016},
+    {make: 'Harley-Davidson', model: 'Sportster Iron 883', year: 1957},
+    {make: 'Ducati', model: 'Panigale V2', year: 2020},
+    {make: 'Kawasaki', model: 'Ninja ZX-10R', year: 2004},
+    {make: 'Honda', model: 'CBR600RR', year: 2003},
 ];
 
 export default bikeData;

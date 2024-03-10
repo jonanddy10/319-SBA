@@ -34,7 +34,7 @@ router.post("/populate", async (req, res) => {
 //R: read/get ALL
 router.get('/', async (req, res) => {
     try {
-        const bike = await bike.find()
+        const bike = await Bike.find()
         res.json(bike)
         if(bike == null){res.status(404).send({ message: 'cannot find bike' })}
         }

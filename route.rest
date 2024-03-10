@@ -56,15 +56,15 @@ Content-Type: application/json
 
 // clean up:
 ###
-//D: delete ALL
+//D: delete ALL cars
 DELETE http://localhost:3000/cars/
 
 ###
-//D: delete ALL
+//D: delete ALL bikes
 DELETE http://localhost:3000/bikes/
 
 ###
-//D: delete ALL
+//D: delete ALL planes
 DELETE http://localhost:3000/planes/
 
 ###
