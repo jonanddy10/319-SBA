@@ -5,7 +5,9 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 // load dotenv
     dotenv.config();
-import router from "./routes/cars.mjs"
+import carRouter from "./routes/cars.mjs"
+import bikeRouter from "./routes/bikes.mjs"
+import planeRouter from "./routes/planes.mjs"
 
 // store port number in a 'PORT' variable
     // the port is unrelated to MONGODB. it's just used by this server as a tool to listen for incoming HTTP requests
@@ -31,8 +33,10 @@ async function plugMongoDB(){
 // middleware
 // allow this server to accept json req as a body:
 app.use(express.json())
-// allow express to use the 'router' within the path: /cars
-app.use('/cars', router)
+// allow express to use the 'router' within the paths: /
+app.use('/cars', carRouter)
+app.use('/bikes', bikeRouter)
+app.use('/planes', planeRouter)
 
 // gloabal error-handling
 app.use((err, _req, res, _next) => {
