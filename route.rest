@@ -11,15 +11,10 @@ Content-Type: application/json
 
 ###
 //C: create one (all fields are required) - FOR TESTING
-POST http://localhost:3000/bikes
+POST http://localhost:3000/cars
 Content-Type: application/json
 
-{
-    "make": "Dodo",
-    "model": "flying",
-    "year": 1968,
-    "water": false
-}
+{"make": "BMW"}
 
 ###
 //R: read All or one (by ObjectID). eg: '/cars/_id'
@@ -37,4 +32,4 @@ Content-Type: application/json
 
 ###
 //D: delete ALL or one (specified by '/cars/_id')
-DELETE http://localhost:3000/cars
+DELETE http://localhost:3000/cars/

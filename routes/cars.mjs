@@ -21,6 +21,21 @@ router.post("/", async (req, res) => {
     }
 });
 
+//C: create/post from a collection
+router.post("/id", async (req, res) => {
+    let car 
+    
+    if(req.body.make != null){
+        car = new Car(...(req.body))
+    }
+    try {
+        const newCar = await car.save()
+        res.status(201).json(newCar)
+    } catch (error) {
+        res.status(400).json({ message: error.message })
+    }
+});
+
 //R: read/get ALL
 router.get('/', async (req, res) => {
     try {
@@ -99,6 +114,7 @@ async function getCar(req, res, next) {
     // Go to next in line at the router this function was originally executed from:
     next()
 }
+
 
 //========================
 // Carschema testing area:
