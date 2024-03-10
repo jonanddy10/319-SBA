@@ -5,8 +5,7 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 // load dotenv
     dotenv.config();
-import router from "./routes/cars.mjs";
-import Car from "./models/carSchema.mjs"
+import router from "./routes/cars.mjs"
 
 // store port number in a 'PORT' variable
     // the port is unrelated to MONGODB. it's just used by this server as a tool to listen for incoming HTTP requests
@@ -19,26 +18,25 @@ const mongoURI = process.env.MONGO_URI
 // establish connection to database in MongoDB using mongoose
 async function plugMongoDB(){
     try {
+        // test.routeName in MongoDB
         await mongoose.connect(mongoURI);
         console.log('Connected to the MongoDB database')
     } catch (error) {
         console.log(`Error connecting to MongoDB: ${error}`);
-    }    
+    } 
+    // store connection to database as db
+    // const db = mongoose.connection;   
 }
-// store connection to database as db (global)
-const db = mongoose.connection;
-
 
 // middleware
 // allow this server to accept json req as a body:
 app.use(express.json())
-
+// allow express to use the 'router' within the path: /cars
 app.use('/cars', router)
 
-// error-handling
+// gloabal error-handling
 app.use((err, _req, res, _next) => {
-    res.status(500).send(`sorry :( there's been an error. \n(${err})`)
-    
+    res.status(500).send(`sorry :( there's been an error. \n(${err})`)   
 })
 
 // listeners
@@ -47,46 +45,6 @@ app.listen(PORT, () => {
 })
 
 plugMongoDB();
-
-
-//========================
-// Carschema testing area:
-//========================
-
-// run();
-// async function run(){
-//     const bmw = await Car.create({make: 'BMW', model: '335i', year: 2010, inProduction: false})
-//     console.log(`Car saved!: \n ${bmw}`)
-// }
-
-// clean();
-// async function clean(){
-//     const car = await Car.deleteMany({make: 'Mazda'})
-//     console.log(car)
-// }
-
-
-
-
-
-
-// reference
-
-// async () => {
-//     await db.createCollection('cars', {
-//         validator: {
-//             $jsonSchema: {
-//                 bsonType: 'object',
-//                 title: 'Car Validation',
-//                 required: ['make', 'model', 'year', 'inProduction'],
-//                 properties: {
-                    
-//                 }
-//             }
-//         }
-//     })
-// }
-
 
 // EXPRESS PRACTICE:
 
