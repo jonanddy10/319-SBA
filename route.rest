@@ -1,16 +1,16 @@
-//C: create one (all fields are required)
+//C: create one (all fields are required) CUSTOM
 POST http://localhost:3000/cars
 Content-Type: application/json
 
 {
-    "make": "Ford",
-    "model": "Mustang",
-    "year": 1967,
-    "inProduction": true
+    "make": "",
+    "model": "",
+    "year": ,
+    "inProduction":
 }
 
 ###
-//C: create one (all fields are required)
+//C: create one (all fields are required) - FOR TESTING
 POST http://localhost:3000/cars
 Content-Type: application/json
 

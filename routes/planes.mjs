@@ -1,5 +1,5 @@
 import express from 'express';
-import Car from '../models/car.mjs';
+import Plane from '../models/plane.mjs';
 
 const router = express.Router()
 
@@ -7,15 +7,15 @@ const router = express.Router()
 
 //C: create/post one (CUSTOM)
 router.post("/", async (req, res) => {
-    const car = new Car({
+    const plane = new Plane({
         make: req.body.make, 
         model: req.body.model, 
         year: req.body.year, 
-        inProduction: req.body.inProduction,
+        water: req.body.water,
     })
     try {
-        const newCar = await car.save()
-        res.status(201).json(newCar)
+        const newPlane = await plane.save()
+        res.status(201).json(newPlane)
     } catch (error) {
         res.status(400).json({ message: error.message })
     }
@@ -24,9 +24,9 @@ router.post("/", async (req, res) => {
 //R: read/get ALL
 router.get('/', async (req, res) => {
     try {
-        const car = await Car.find()
-        res.json(car)
-        if(car == null){res.status(404).send({ message: 'cannot find car' })}
+        const plane = await Plane.find()
+        res.json(plane)
+        if(plane == null){res.status(404).send({ message: 'cannot find plane' })}
         }
     catch (error) {
         return res.status(500).json({ message: error.message })
@@ -34,30 +34,30 @@ router.get('/', async (req, res) => {
 })
 
 //R: read/get ONE
-router.get('/:id', getCar, async (req, res) => {
+router.get('/:id', getPlane, async (req, res) => {
     try {
-        res.send(res.car)
+        res.send(res.plane)
     } catch (error) {
         res.status(500).json({ message: error.message })  
     }
 })
 
 //U: update/patch
-router.patch("/:id", getCar, async (req, res) => {
+router.patch("/:id", getPlane, async (req, res) => {
     if(req.body.make != null){
-        res.car.make = req.body.make
+        res.plane.make = req.body.make
     }
     if(req.body.model != null){
-        res.car.model = req.body.model
+        res.plane.model = req.body.model
     }
     if(req.body.year != null){
-        res.car.year = req.body.year
+        res.plane.year = req.body.year
     }
-    if(req.body.inProduction != null){
-        res.car.inProduction = req.body.inProduction
+    if(req.body.water != null){
+        res.plane.water = req.body.water
     }
     try {
-        const updatedCar = await res.car.save()
+        const updatedCar = await res.plane.save()
         res.json(updatedCar)
     } catch (error) {
         res.status(400).json({ message: error.message })
@@ -67,7 +67,7 @@ router.patch("/:id", getCar, async (req, res) => {
 //D: delete ALL
 router.delete("/", async (req, res) => {
     try {
-        await Car.deleteMany()
+        await Plane.deleteMany()
         res.send({ message: 'You deleted EVERYTHING!' })
     } catch (error) {
         res.status(500).json({ message: error.message })
@@ -75,10 +75,10 @@ router.delete("/", async (req, res) => {
 })
 
 //D: delete ONE
-router.delete('/:id', getCar, async (req, res) => {
+router.delete('/:id', getPlane, async (req, res) => {
     try {
-       await res.car.deleteOne()
-       res.json({ message: 'car removed'})
+       await res.plane.deleteOne()
+       res.json({ message: 'plane removed'})
     } catch (error) {
         res.status(500).json({ message: 'sorry, there\'s been a server side error :('})
     }
@@ -86,16 +86,16 @@ router.delete('/:id', getCar, async (req, res) => {
 
 // middleware
 
-async function getCar(req, res, next) {
-    let car
+async function getPlane(req, res, next) {
+    let plane
     try {
-        car = await Car.findById(req.params.id)
-        if(car == null){res.status(404).send({ message: 'cannot find car' })}
+        plane = await Plane.findById(req.params.id)
+        if(plane == null){res.status(404).send({ message: 'cannot find plane' })}
         }
     catch (error) {
         return res.status(500).json({ message: error.message })
     }
-    res.car = car
+    res.plane = plane
     // Go to next in line at the router this function was originally executed from:
     next()
 }
@@ -106,14 +106,14 @@ async function getCar(req, res, next) {
 
 // run();
 // async function run(){
-//     const bmw = await Car.create({make: 'BMW', model: '335i', year: 2010, inProduction: false})
-//     console.log(`Car saved!: \n ${bmw}`)
+//     const bmw = await Plane.create({make: 'BMW', model: '335i', year: 2010, water: false})
+//     console.log(`Plane saved!: \n ${bmw}`)
 // }
 
 // clean();
 // async function clean(){
-//     const car = await Car.deleteMany({make: 'Mazda'})
-//     console.log(car)
+//     const plane = await Plane.deleteMany({make: 'Mazda'})
+//     console.log(plane)
 // }
 
 export default router

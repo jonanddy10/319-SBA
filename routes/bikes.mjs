@@ -1,5 +1,5 @@
 import express from 'express';
-import Car from '../models/car.mjs';
+import Bike from '../models/bike.mjs';
 
 const router = express.Router()
 
@@ -7,15 +7,14 @@ const router = express.Router()
 
 //C: create/post one (CUSTOM)
 router.post("/", async (req, res) => {
-    const car = new Car({
+    const bike = new Bike({
         make: req.body.make, 
         model: req.body.model, 
-        year: req.body.year, 
-        inProduction: req.body.inProduction,
+        year: req.body.year
     })
     try {
-        const newCar = await car.save()
-        res.status(201).json(newCar)
+        const newBike = await bike.save()
+        res.status(201).json(newBike)
     } catch (error) {
         res.status(400).json({ message: error.message })
     }
@@ -24,9 +23,9 @@ router.post("/", async (req, res) => {
 //R: read/get ALL
 router.get('/', async (req, res) => {
     try {
-        const car = await Car.find()
-        res.json(car)
-        if(car == null){res.status(404).send({ message: 'cannot find car' })}
+        const bike = await bike.find()
+        res.json(bike)
+        if(bike == null){res.status(404).send({ message: 'cannot find bike' })}
         }
     catch (error) {
         return res.status(500).json({ message: error.message })
@@ -34,31 +33,28 @@ router.get('/', async (req, res) => {
 })
 
 //R: read/get ONE
-router.get('/:id', getCar, async (req, res) => {
+router.get('/:id', getBike, async (req, res) => {
     try {
-        res.send(res.car)
+        res.send(res.bike)
     } catch (error) {
         res.status(500).json({ message: error.message })  
     }
 })
 
 //U: update/patch
-router.patch("/:id", getCar, async (req, res) => {
+router.patch("/:id", getBike, async (req, res) => {
     if(req.body.make != null){
-        res.car.make = req.body.make
+        res.bike.make = req.body.make
     }
     if(req.body.model != null){
-        res.car.model = req.body.model
+        res.bike.model = req.body.model
     }
     if(req.body.year != null){
-        res.car.year = req.body.year
-    }
-    if(req.body.inProduction != null){
-        res.car.inProduction = req.body.inProduction
+        res.bike.year = req.body.year
     }
     try {
-        const updatedCar = await res.car.save()
-        res.json(updatedCar)
+        const updatedBike = await res.bike.save()
+        res.json(updatedBike)
     } catch (error) {
         res.status(400).json({ message: error.message })
     }
@@ -67,7 +63,7 @@ router.patch("/:id", getCar, async (req, res) => {
 //D: delete ALL
 router.delete("/", async (req, res) => {
     try {
-        await Car.deleteMany()
+        await Bike.deleteMany()
         res.send({ message: 'You deleted EVERYTHING!' })
     } catch (error) {
         res.status(500).json({ message: error.message })
@@ -75,10 +71,10 @@ router.delete("/", async (req, res) => {
 })
 
 //D: delete ONE
-router.delete('/:id', getCar, async (req, res) => {
+router.delete('/:id', getBike, async (req, res) => {
     try {
-       await res.car.deleteOne()
-       res.json({ message: 'car removed'})
+       await res.bike.deleteOne()
+       res.json({ message: 'bike removed'})
     } catch (error) {
         res.status(500).json({ message: 'sorry, there\'s been a server side error :('})
     }
@@ -86,16 +82,16 @@ router.delete('/:id', getCar, async (req, res) => {
 
 // middleware
 
-async function getCar(req, res, next) {
-    let car
+async function getBike(req, res, next) {
+    let bike
     try {
-        car = await Car.findById(req.params.id)
-        if(car == null){res.status(404).send({ message: 'cannot find car' })}
+        bike = await bike.findById(req.params.id)
+        if(bike == null){res.status(404).send({ message: 'cannot find bike' })}
         }
     catch (error) {
         return res.status(500).json({ message: error.message })
     }
-    res.car = car
+    res.bike = bike
     // Go to next in line at the router this function was originally executed from:
     next()
 }
