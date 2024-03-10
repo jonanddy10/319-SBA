@@ -1,5 +1,6 @@
 import express from 'express';
 import Bike from '../models/bike.mjs';
+import bikeData from '../utilities/bikeData.mjs';
 
 const router = express.Router()
 
@@ -15,6 +16,16 @@ router.post("/", async (req, res) => {
     try {
         const newBike = await bike.save()
         res.status(201).json(newBike)
+    } catch (error) {
+        res.status(400).json({ message: error.message })
+    }
+});
+
+//C: create/post populate route
+router.post("/populate", async (req, res) => {
+    try {
+        await Bike.insertMany(bikeData)
+        res.status(201).send('Database population with bike collection was succesful')
     } catch (error) {
         res.status(400).json({ message: error.message })
     }

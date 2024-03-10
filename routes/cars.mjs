@@ -1,5 +1,6 @@
 import express from 'express';
 import Car from '../models/car.mjs';
+import carData from '../utilities/carData.mjs';
 
 const router = express.Router()
 
@@ -21,16 +22,11 @@ router.post("/", async (req, res) => {
     }
 });
 
-//C: create/post from a collection
-router.post("/id", async (req, res) => {
-    let car 
-    
-    if(req.body.make != null){
-        car = new Car(...(req.body))
-    }
+//C: create/post populate route
+router.post("/populate", async (req, res) => {
     try {
-        const newCar = await car.save()
-        res.status(201).json(newCar)
+        await Car.insertMany(carData)
+        res.status(201).send('Database population with car collection was succesful')
     } catch (error) {
         res.status(400).json({ message: error.message })
     }

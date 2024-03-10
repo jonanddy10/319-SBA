@@ -1,5 +1,6 @@
 import express from 'express';
 import Plane from '../models/plane.mjs';
+import planeData from '../utilities/planeData.mjs';
 
 const router = express.Router()
 
@@ -16,6 +17,16 @@ router.post("/", async (req, res) => {
     try {
         const newPlane = await plane.save()
         res.status(201).json(newPlane)
+    } catch (error) {
+        res.status(400).json({ message: error.message })
+    }
+});
+
+//C: create/post populate route
+router.post("/populate", async (req, res) => {
+    try {
+        await Plane.insertMany(planeData)
+        res.status(201).send('Database population with plane collection was succesful')
     } catch (error) {
         res.status(400).json({ message: error.message })
     }

@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import data from "../utilities/carData.mjs"
 
 // frame:
 const carSchema = new mongoose.Schema({
