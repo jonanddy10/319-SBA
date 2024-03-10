@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import bikeData from "../utilities/bikeData.mjs"
 
 // frame:
 const bikeSchema = new mongoose.Schema({
@@ -16,5 +17,5 @@ const bikeSchema = new mongoose.Schema({
     },
 })
 
-// export function: collection name in MongoDB is: car, Schema name is: carSchema
+// export function: collection name in MongoDB is: bike, Schema name is: bikeSchema
 export default mongoose.model("bike", bikeSchema);

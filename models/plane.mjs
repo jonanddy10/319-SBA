@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import planeData from "../utilities/planeData.mjs"
 
 // frame:
 const planeSchema = new mongoose.Schema({
@@ -20,5 +21,5 @@ const planeSchema = new mongoose.Schema({
     }
 })
 
-// export function: collection name in MongoDB is: car, Schema name is: carSchema
+// export function: collection name in MongoDB is: plane, Schema name is: planeSchema
 export default mongoose.model("plane", planeSchema);
