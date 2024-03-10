@@ -70,7 +70,7 @@ router.delete("/", async (req, res) => {
         await Car.deleteMany()
         res.send({ message: 'You deleted EVERYTHING!' })
     } catch (error) {
-        
+        res.status(500).json({ message: error.message })
     }
 })
 
