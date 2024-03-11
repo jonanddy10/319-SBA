@@ -21,4 +21,4 @@ Each collection is filled with their respective data
  - Patch: Update data
  - DELETE: Remove data
 
- You can play around with these requests in the 'route.rest' file.
+ I made a pre-set file ('route.rest') to play around with these requests easily which requires the 'REST Client' extension by Huachao Mao
